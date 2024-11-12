@@ -52,22 +52,22 @@ function addComida(req, resp){
     <form class="row g-3" novalidate>
     <div class="col-md-4">
     <label for="Nome do Prato" class="form-label">Nome do Prato</label>
-    <input type="text" class="form-control" id="nome" placeholder="Exemplo:Arroz Carreteiro" required>
+    <input type="text" class="form-control" id="nome" placeholder="Exemplo:Arroz Carreteiro">
     </div>
 
     <div class="col-md-4">
     <label for="Região" class="form-label">Região Tipica</label>
-    <input type="text" class="form-control" id="regiao" placeholder="Exemplo:Centro-Oeste e Nordeste" required>
+    <input type="text" class="form-control" id="regiao" placeholder="Exemplo:Centro-Oeste e Nordeste">
   </div>
 
   <div class="col-md-4">
     <label for="Melhor Horario Para o consumo" class="form-label">Melhor Horario Para o consumo</label>
-    <input type="text" class="form-control" id="horario" placeholder="Exemplo:Cafe da Manha - Almoço - Jantar - Ceia" required>
+    <input type="text" class="form-control" id="horario" placeholder="Exemplo:Cafe da Manha - Almoço - Jantar - Ceia">
   </div>
 
   <div class="col-md-6">
     <label for="Estação" class="form-label">Melhor Estacao para o consumo</label>
-    <input type="text" class="form-control" id="estacao" placeholder="Exemplo:Inverno" required>
+    <input type="text" class="form-control" id="estacao" placeholder="Exemplo:Inverno">
   </div>
 
   <div class="col-12">
@@ -90,6 +90,8 @@ function cadastrodeComidas(req, resp){
 
     const comida = {nome, regiao, horario, estacao};
 
+    if (nome && regiao && horario && estacao)
+    {
     listaComida.push(comida);
 
 
@@ -130,7 +132,33 @@ function cadastrodeComidas(req, resp){
                 </body>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             </html>`);
-
+        }
+        else 
+        {
+            resp.write(`
+                <html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Cadastro de Comida :-)</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <div class = "Container text-center">
+   <h1> Cadastro de Pratros</h1>
+    <form class="row g-3" novalidate>
+    <div class="col-md-4">
+    <label for="Nome do Prato" class="form-label">Nome do Prato</label>
+    <input type="text" class="form-control" id="nome" placeholder="Exemplo:Arroz Carreteiro">
+    </html>
+    `);
+    if (!nome )
+    {
+        resp.write(`<div>
+                        <span><p class = "bg-danger">Por Favor !!! Nome do Prato Obrigatorio</p></span>
+                    </div>`);
+    }
+        }
         resp.end();
 }
 
