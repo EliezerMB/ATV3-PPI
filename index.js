@@ -157,6 +157,7 @@ function cadastrodeComidas(req, resp){
         resp.write(`<div>
                         <span><p class = "bg-danger">Por Favor !!! Nome do Prato Obrigatorio</p></span>
                     </div>`);
+                    resp.end()
     }
         }
         resp.end();
